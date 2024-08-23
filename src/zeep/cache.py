@@ -79,9 +79,9 @@ class InMemoryCache(Base):
         logger.debug("Caching contents of %s", url)
         if not isinstance(content, (str, bytes)):
             raise TypeError(
-                "a bytes-like object is required, not {}".format(type(content).__name__)
+                f"a bytes-like object is required, not {type(content).__name__}"
             )
-        self._cache[url] = (datetime.datetime.utcnow(), content)
+        self._cache[url] = (datetime.datetime.now(datetime.timezone.utc), content)
 
     def get(self, url):
         try:
@@ -146,7 +146,7 @@ class SqliteCache(VersionedCacheBase):
             cursor.execute("DELETE FROM request WHERE url = ?", (url,))
             cursor.execute(
                 "INSERT INTO request (created, url, content) VALUES (?, ?, ?)",
-                (datetime.datetime.utcnow(), url, data),
+                (datetime.datetime.now(datetime.timezone.utc), url, data),
             )
             conn.commit()
 
@@ -169,8 +169,9 @@ def _is_expired(value, timeout):
     if timeout is None:
         return False
 
-    now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
-    max_age = value.replace(tzinfo=pytz.utc)
+    now = datetime.datetime.now(datetime.timezone.utc)
+    max_age = value.astimezone(datetime.timezone.utc)
+    max_age = value.replace(tzinfo=datetime.timezone.utc)
     max_age += datetime.timedelta(seconds=timeout)
     return now > max_age
 

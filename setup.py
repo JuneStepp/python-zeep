@@ -3,12 +3,11 @@ import re
 from setuptools import setup
 
 install_requires = [
-    "attrs>=17.2.0",
-    "cached-property>=1.3.0; python_version<'3.8'",
+    "attrs>=23.2.0",
     "isodate>=0.5.4",
-    "lxml>=4.6.0",
+    "lxml>=4.9.3",
     "platformdirs>=1.4.0",
-    "requests>=2.7.0",
+    "requests>=2.32.0",
     "requests-toolbelt>=0.7.1",
     "requests-file>=1.5.1",
     "pytz",
@@ -31,10 +30,10 @@ tests_require = [
     "pytest-cov==2.8.1",
     "pytest-httpx",
     "pytest-asyncio",
-    "pytest==6.2.5",
+    "pytest==7.4.4",
     "requests_mock>=0.7.0",
     # Linting
-    "isort==5.3.2",
+    "isort==5.11.2",
     "flake8==3.8.3",
     "flake8-blind-except==0.1.1",
     "flake8-debugger==3.2.1",
@@ -58,7 +57,7 @@ setup(
     project_urls={
         "Source": "https://github.com/mvantellingen/python-zeep",
     },
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     install_requires=install_requires,
     tests_require=tests_require,
     extras_require={
@@ -77,11 +76,11 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3 :: Only",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
     ],

@@ -1,6 +1,6 @@
-from email.message import Message
 import inspect
 import typing
+from email.message import Message
 
 from lxml import etree
 
@@ -33,7 +33,7 @@ def as_qname(value: str, nsmap, target_namespace=None) -> etree.QName:
             namespace = nsmap.get(prefix)
 
         if not namespace:
-            raise XMLParseError("No namespace defined for %r (%r)" % (prefix, value))
+            raise XMLParseError(f"No namespace defined for {prefix!r} ({value!r})")
 
         # Workaround for https://github.com/mvantellingen/python-zeep/issues/349
         if not local:
@@ -91,7 +91,6 @@ def detect_soap_env(envelope):
 def get_media_type(value):
     """Parse a HTTP content-type header and return the media-type"""
     msg = Message()
-    msg['content-type'] = value
-    
-    return msg.get_content_type()
+    msg["content-type"] = value
 
+    return msg.get_content_type()

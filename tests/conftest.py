@@ -16,7 +16,7 @@ def no_requests(request, monkeypatch):
     monkeypatch.setattr("socket.socket", func)
 
 
-@pytest.yield_fixture()
+@pytest.fixture
 def event_loop():
     import asyncio
 

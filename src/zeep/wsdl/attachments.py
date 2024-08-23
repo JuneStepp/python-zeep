@@ -6,11 +6,7 @@ See https://www.w3.org/TR/SOAP-attachments
 
 import base64
 import sys
-
-if sys.version_info >= (3, 8):
-    from functools import cached_property
-else:
-    from cached_property import cached_property
+from functools import cached_property
 
 from requests.structures import CaseInsensitiveDict
 
@@ -65,7 +61,7 @@ class Attachment:
         self._part = part
 
     def __repr__(self):
-        return "<Attachment(%r, %r)>" % (self.content_id, self.content_type)
+        return f"<Attachment({self.content_id!r}, {self.content_type!r})>"
 
     @cached_property
     def content(self):
