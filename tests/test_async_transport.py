@@ -25,7 +25,6 @@ def test_load(httpx_mock):
 
 
 @pytest.mark.requests
-@pytest.mark.asyncio
 def test_load_cache(httpx_mock):
     cache = InMemoryCache()
     transport = AsyncTransport(cache=cache)

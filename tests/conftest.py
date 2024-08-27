@@ -14,14 +14,3 @@ def no_requests(request, monkeypatch):
         pytest.fail("External connections not allowed during tests.")
 
     monkeypatch.setattr("socket.socket", func)
-
-
-@pytest.fixture
-def event_loop():
-    import asyncio
-
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-
-    yield loop
-    loop.close()

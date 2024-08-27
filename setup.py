@@ -28,7 +28,7 @@ tests_require = [
     "pretend==1.0.9",
     "pytest-cov==2.8.1",
     "pytest-httpx",
-    "pytest-asyncio",
+    "pytest-asyncio>=0.23.0",
     "pytest==7.4.4",
     "requests_mock>=0.7.0",
     # Linting
