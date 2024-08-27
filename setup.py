@@ -10,7 +10,6 @@ install_requires = [
     "requests>=2.32.0",
     "requests-toolbelt>=0.7.1",
     "requests-file>=1.5.1",
-    "pytz",
 ]
 
 docs_require = [

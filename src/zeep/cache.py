@@ -8,7 +8,6 @@ import typing
 from contextlib import contextmanager
 
 import platformdirs
-import pytz
 
 # The sqlite3 is not available on Google App Engine so we handle the
 # ImportError here and set the sqlite3 var to None.
