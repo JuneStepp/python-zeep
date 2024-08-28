@@ -1,6 +1,71 @@
+[project]
+name = "zeep"
+version = "4.2.1"
+description = "A Python SOAP client"
+authors = [
+    { name = "Michael van Tellingen", email = "michaelvantellingen@gmail.com" },
+]
+readme = "README.rst"
+keywords = ["SOAP", "XML"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "attrs>=23.2.0",
+    "isodate>=0.5.4",
+    "lxml>=4.9.3",
+    "platformdirs>=1.4.0",
+    "requests>=2.32.0",
+    "requests-toolbelt>=0.7.1",
+    "requests-file>=1.5.1",
+]
+
+[project.optional-dependencies]
+async = ["httpx>=0.15.0"]
+xmlsec = ["xmlsec>=0.6.1"]
+docs = ["sphinx>=1.4.0"]
+test = [
+    "coverage[toml]==5.2.1",
+    "freezegun==0.3.15",
+    "pretend==1.0.9",
+    "pytest-cov==2.8.1",
+    "pytest-httpx",
+    "pytest-asyncio>=0.23.0",
+    "pytest==7.4.4",
+    "requests_mock>=0.7.0",
+    "xmlsec",
+    # Linting
+    "isort==5.11.2",
+    "flake8==3.8.3",
+    "flake8-blind-except==0.1.1",
+    "flake8-debugger==3.2.1",
+    "flake8-imports==0.1.1",
+]
+
+[tool.uv]
+dev-dependencies = ["tox"]
+
+
+[project.urls]
+Documentation = "https://docs.python-zeep.org"
+Repository = "https://github.com/mvantellingen/python-zeep"
+"Bug Tracker" = "https://github.com/mvantellingen/python-zeep/issues"
+Changelog = "https://github.com/mvantellingen/python-zeep/blob/main/CHANGES"
+
 [build-system]
-requires = ["setuptools>=40.6.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.coverage.run]
 branch = true
@@ -12,6 +77,7 @@ source = ["src", "*/site-packages/"]
 [tool.coverage.report]
 show_missing = true
 
+
 [tool.isort]
 line_length = 88
 multi_line_output = 3
@@ -22,11 +88,9 @@ known_first_party = ["zeep", "tests"]
 use_parentheses = true
 
 [tool.pytest.ini_options]
-minversion = "6.0"
-testpaths = [
-    "tests",
-]
+minversion = "7.0"
+testpaths = ["tests"]
 markers = [
     # mark a test to allow socket usage
-    "requests"
+    "requests",
 ]
