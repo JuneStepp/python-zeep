@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 try:
     from requests import Session
 except ImportError:
-    from httpx import Client as Session
+    from httpx2 import Client as Session
 
 from zeep.cache import SqliteCache
 from zeep.client import Client

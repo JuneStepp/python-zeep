@@ -22,13 +22,13 @@ import sys
 from typing import TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    import httpx
+    import httpx2
     import requests
 
 try:
     from requests.structures import CaseInsensitiveDict as Headers
 except ImportError:
-    from httpx import Headers
+    from httpx2 import Headers
 
 
 def encode_with(string: Union[str, bytes], encoding: str) -> bytes:
@@ -178,7 +178,9 @@ class MultipartDecoder(object):
 
     @classmethod
     def from_response(
-        cls, response: Union[requests.Response, httpx.Response], encoding: str = "utf-8"
+        cls,
+        response: Union[requests.Response, httpx2.Response],
+        encoding: str = "utf-8",
     ):
         content = response.content
         content_type = response.headers.get("content-type", None)

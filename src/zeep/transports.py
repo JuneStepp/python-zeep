@@ -11,7 +11,7 @@ from zeep.utils import get_media_type, get_version
 from zeep.wsdl.utils import etree_to_string
 
 if TYPE_CHECKING:
-    from httpx import Client
+    from httpx2 import Client
     from requests import Session
 
 try:
@@ -21,23 +21,23 @@ except ImportError:
     requests = None
 
 try:
-    import httpx
+    import httpx2
 except ImportError:
-    httpx = None
+    httpx2 = None
 
 try:
     from packaging.version import Version
 
-    if httpx is None or Version(httpx.__version__) < Version("0.26.0"):
-        HTTPX_PROXY_KWARG_NAME = "proxies"
+    if httpx2 is None:
+        HTTPX2_PROXY_KWARG_NAME = "proxies"
     else:
-        HTTPX_PROXY_KWARG_NAME = "proxy"
+        HTTPX2_PROXY_KWARG_NAME = "proxy"
 except ImportError:
     Version = None
-    HTTPX_PROXY_KWARG_NAME = None
+    HTTPX2_PROXY_KWARG_NAME = None
 
-if requests is None and httpx is None:
-    raise RuntimeError("Either `requests` or `httpx` must be installed.")
+if requests is None and httpx2 is None:
+    raise RuntimeError("Either `requests` or `httpx2` must be installed.")
 
 __all__ = ["AsyncTransport", "Transport"]
 
@@ -49,7 +49,7 @@ class Transport:
     :param timeout: The timeout for loading wsdl and xsd documents.
     :param operation_timeout: The timeout for operations (POST/GET). By
                               default this is None (no timeout).
-    :param session: A :py:class:`request.Session()` or :py:class:`httpx.Client()` object (optional)
+    :param session: A :py:class:`request.Session()` or :py:class:`httpx2.Client()` object (optional)
 
     """
 
@@ -66,7 +66,7 @@ class Transport:
         self.logger = logging.getLogger(__name__)
 
         self._close_session = not session
-        self.session = session or (requests.Session() if requests else httpx.Client())
+        self.session = session or (requests.Session() if requests else httpx2.Client())
         if requests and isinstance(self.session, requests.Session):
             self.session = session or requests.Session()
             self.session.mount("file://", FileAdapter())
@@ -191,7 +191,7 @@ class Transport:
 
 
 class AsyncTransport(Transport):
-    """Asynchronous Transport class using httpx.
+    """Asynchronous Transport class using httpx2.
 
     Note that loading the wsdl is still a sync process since and only the
     operations can be called via async.
@@ -208,7 +208,7 @@ class AsyncTransport(Transport):
         verify_ssl=True,
         proxy=None,
     ):
-        if httpx is None or HTTPX_PROXY_KWARG_NAME is None:
+        if httpx2 is None or HTTPX2_PROXY_KWARG_NAME is None:
             raise RuntimeError(
                 "To use AsyncTransport, install zeep with the async extras, "
                 "e.g., `pip install zeep[async]`"
@@ -216,13 +216,13 @@ class AsyncTransport(Transport):
 
         self._close_session = False
         self.cache = cache
-        proxy_kwargs = {HTTPX_PROXY_KWARG_NAME: proxy}
-        self.wsdl_client = wsdl_client or httpx.Client(
+        proxy_kwargs = {HTTPX2_PROXY_KWARG_NAME: proxy}
+        self.wsdl_client = wsdl_client or httpx2.Client(
             verify=verify_ssl,
             timeout=timeout,
             **proxy_kwargs,
         )
-        self.client = client or httpx.AsyncClient(
+        self.client = client or httpx2.AsyncClient(
             verify=verify_ssl,
             timeout=operation_timeout,
             **proxy_kwargs,
@@ -245,7 +245,7 @@ class AsyncTransport(Transport):
 
         try:
             response.raise_for_status()
-        except httpx.HTTPStatusError:
+        except httpx2.HTTPStatusError:
             raise TransportError(status_code=response.status_code)
         return result
 

@@ -10,7 +10,7 @@ from functools import cached_property
 try:
     from requests.structures import CaseInsensitiveDict as Headers
 except ImportError:
-    from httpx import Headers
+    from httpx2 import Headers
 
 
 class MessagePack:

@@ -7,7 +7,7 @@ license = { text = "MIT" }
 authors = [
     { name = "Michael van Tellingen", email = "michaelvantellingen@gmail.com" }
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "License :: OSI Approved :: MIT License",
@@ -36,7 +36,7 @@ Changelog = "https://github.com/mvantellingen/python-zeep/blob/main/CHANGES"
 [project.optional-dependencies]
 docs = ["sphinx>=1.4.0"]
 async = [
-    "httpx>=0.15.0",
+    "httpx2>=2.14.0",
     "packaging",
 ]
 xmlsec = ["xmlsec>=0.6.1"]
@@ -53,6 +53,9 @@ dev = [
     "requests_mock==1.12.1",
     "ruff==0.15.17",
 ]
+
+[tool.uv.sources]
+pytest-httpx = { git = "https://github.com/Klavionik/pytest_httpx.git", branch = "add_httpx2_support" }
 
 [build-system]
 requires = ["setuptools>=40.6.0", "wheel"]
