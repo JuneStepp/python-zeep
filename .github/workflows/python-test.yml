@@ -57,7 +57,7 @@ jobs:
       # xmlsec has no wheels for Windows / Python 3.14, so it is only installed
       # on mac/linux for Python <= 3.13 (matching the system deps above).
       run: >-
-        uv sync --frozen --extra async
+        uv sync --frozen --extra async --extra requests
         ${{ (matrix.platform != 'windows-latest' && matrix.python-version != '3.14') && '--extra xmlsec' || '' }}
 
     - name: Test with pytest

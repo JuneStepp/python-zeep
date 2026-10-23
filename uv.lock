@@ -1004,8 +1004,6 @@ dependencies = [
     { name = "isodate" },
     { name = "lxml" },
     { name = "platformdirs" },
-    { name = "requests" },
-    { name = "requests-file" },
 ]
 
 [package.optional-dependencies]
@@ -1016,6 +1014,10 @@ async = [
 docs = [
     { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+]
+requests = [
+    { name = "requests" },
+    { name = "requests-file" },
 ]
 xmlsec = [
     { name = "xmlsec" },
@@ -1042,12 +1044,12 @@ requires-dist = [
     { name = "lxml", specifier = ">=4.6.0" },
     { name = "packaging", marker = "extra == 'async'" },
     { name = "platformdirs", specifier = ">=1.4.0" },
-    { name = "requests", specifier = ">=2.7.0" },
-    { name = "requests-file", specifier = ">=1.5.1" },
+    { name = "requests", marker = "extra == 'requests'", specifier = ">=2.7.0" },
+    { name = "requests-file", marker = "extra == 'requests'", specifier = ">=1.5.1" },
     { name = "sphinx", marker = "extra == 'docs'", specifier = ">=1.4.0" },
     { name = "xmlsec", marker = "extra == 'xmlsec'", specifier = ">=0.6.1" },
 ]
-provides-extras = ["docs", "async", "xmlsec"]
+provides-extras = ["docs", "requests", "async", "xmlsec"]
 
 [package.metadata.requires-dev]
 dev = [

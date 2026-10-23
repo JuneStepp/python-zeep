@@ -24,8 +24,6 @@ dependencies = [
     "isodate>=0.5.4",
     "lxml>=4.6.0",
     "platformdirs>=1.4.0",
-    "requests>=2.7.0",
-    "requests-file>=1.5.1",
 ]
 
 [project.urls]
@@ -35,6 +33,10 @@ Changelog = "https://github.com/mvantellingen/python-zeep/blob/main/CHANGES"
 
 [project.optional-dependencies]
 docs = ["sphinx>=1.4.0"]
+requests = [
+	"requests>=2.7.0",
+    "requests-file>=1.5.1",
+]
 async = [
     "httpx2>=2.14.0",
     "packaging",
